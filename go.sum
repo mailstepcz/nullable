@@ -2,8 +2,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/mailstepcz/maybe v0.0.0-20240903135450-b09eb1dc973b h1:QHWYwsttAhsXXa0QX8hpQ24JyzdQwzmU161dQISCZ6A=
-github.com/mailstepcz/maybe v0.0.0-20240903135450-b09eb1dc973b/go.mod h1:jYa5xYUC9pKgpt0XkMUZ5A0tXcfKLrxZEAU7nGUrSz8=
+github.com/mailstepcz/maybe v0.1.0 h1:Bl4PwrGdLJtM88NuoL0xZ1uBBO+FBAuP4wISrF1VaOs=
+github.com/mailstepcz/maybe v0.1.0/go.mod h1:jYa5xYUC9pKgpt0XkMUZ5A0tXcfKLrxZEAU7nGUrSz8=
 github.com/mailstepcz/pointer v0.1.0 h1:X2IOwkG34Opr0KM4naDbhubWqVVjlFq8Ti1kclSwye8=
 github.com/mailstepcz/pointer v0.1.0/go.mod h1:zTgDutGlayTlC2vcUOV1lZXr+EjR+95iAgVSFUjXkBA=
 github.com/oklog/ulid/v2 v2.1.0 h1:+9lhoxAP56we25tyYETBBY1YLA2SaoLvUFgrP2miPJU=
