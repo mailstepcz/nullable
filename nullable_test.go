@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"reflect"
 	"testing"
+	stduuid "uuid"
 
+	"github.com/google/uuid"
 	"github.com/mailstepcz/maybe"
 	"github.com/stretchr/testify/require"
 )
@@ -15,6 +17,50 @@ func TestMaybeNullable(t *testing.T) {
 	typ, ok := Type(reflect.TypeFor[maybe.Maybe[string]]())
 	req.True(ok)
 	req.Equal(reflect.TypeFor[Nullable[string]](), typ)
+}
+
+func TestUUIDTypes(t *testing.T) {
+	t.Run("google uuid", func(t *testing.T) {
+		req := require.New(t)
+
+		typ, ok := Type(reflect.TypeFor[uuid.UUID]())
+		req.True(ok)
+		req.Equal(reflect.TypeFor[Nullable[uuid.UUID]](), typ)
+
+		typ, ok = Type(reflect.TypeFor[[]uuid.UUID]())
+		req.True(ok)
+		req.Equal(reflect.TypeFor[Slice[uuid.UUID]](), typ)
+	})
+
+	t.Run("stdlib uuid", func(t *testing.T) {
+		req := require.New(t)
+
+		typ, ok := Type(reflect.TypeFor[stduuid.UUID]())
+		req.True(ok)
+		req.Equal(reflect.TypeFor[Nullable[stduuid.UUID]](), typ)
+
+		typ, ok = Type(reflect.TypeFor[maybe.Maybe[stduuid.UUID]]())
+		req.True(ok)
+		req.Equal(reflect.TypeFor[Nullable[stduuid.UUID]](), typ)
+
+		typ, ok = Type(reflect.TypeFor[[]stduuid.UUID]())
+		req.True(ok)
+		req.Equal(reflect.TypeFor[Slice[stduuid.UUID]](), typ)
+	})
+
+	t.Run("stdlib uuid unmarshal", func(t *testing.T) {
+		req := require.New(t)
+
+		var v struct {
+			ID  Nullable[stduuid.UUID] `json:"id"`
+			IDs Slice[stduuid.UUID]    `json:"ids"`
+		}
+		err := json.Unmarshal([]byte(`{"id": "f81d4fae-7dec-11d0-a765-00a0c91e6bf6", "ids": ["f81d4fae-7dec-11d0-a765-00a0c91e6bf6"]}`), &v)
+		req.NoError(err)
+		req.True(v.ID.IsNonNull())
+		req.Equal(stduuid.MustParse("f81d4fae-7dec-11d0-a765-00a0c91e6bf6"), v.ID.Value())
+		req.Equal(1, v.IDs.Len())
+	})
 }
 
 func TestNullableFields(t *testing.T) {
