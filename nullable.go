@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"reflect"
 	"time"
+	stduuid "uuid"
 
 	"github.com/google/uuid"
 	"github.com/mailstepcz/maybe"
@@ -26,6 +27,7 @@ func init() {
 	registerType[string]()
 	registerType[bool]()
 	registerType[uuid.UUID]()
+	registerType[stduuid.UUID]()
 	registerType[time.Time]()
 	registerType[decimal.Decimal]()
 	registerType[ulid.ULID]()
