@@ -55,11 +55,16 @@ func TestUUIDTypes(t *testing.T) {
 			ID  Nullable[stduuid.UUID] `json:"id"`
 			IDs Slice[stduuid.UUID]    `json:"ids"`
 		}
-		err := json.Unmarshal([]byte(`{"id": "f81d4fae-7dec-11d0-a765-00a0c91e6bf6", "ids": ["f81d4fae-7dec-11d0-a765-00a0c91e6bf6"]}`), &v)
+		err := json.Unmarshal([]byte(`{"id": "f81d4fae-7dec-11d0-a765-00a0c91e6bf6", "ids": ["f81d4fae-7dec-11d0-a765-00a0c91e6bf6", "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"]}`), &v)
 		req.NoError(err)
 		req.True(v.ID.IsNonNull())
 		req.Equal(stduuid.MustParse("f81d4fae-7dec-11d0-a765-00a0c91e6bf6"), v.ID.Value())
-		req.Equal(1, v.IDs.Len())
+		req.True(v.IDs.IsNonNull())
+		req.Equal(2, v.IDs.Len())
+		req.Equal([]stduuid.UUID{
+			stduuid.MustParse("f81d4fae-7dec-11d0-a765-00a0c91e6bf6"),
+			stduuid.MustParse("a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"),
+		}, v.IDs.Value())
 	})
 }
 
